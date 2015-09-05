@@ -1,0 +1,14 @@
+{
+  "slack": {
+    "token": "xoxb-..."
+  },
+  "league": {
+    "url": "http://epltipping.foxsports.com.au/",
+    "username": "myuser",
+    "password": "mypassword",
+    "leagueId": "103"
+  },
+  "tips": {
+    "url": "http://www.windrawwin.com/predictionsnew.asp?l=PRM"
+  }
+}

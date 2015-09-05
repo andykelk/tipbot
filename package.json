@@ -1,0 +1,20 @@
+{
+  "name": "tipbot",
+  "version": "0.2.1",
+  "description": "Bot for EPL tipping",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "slack-client": "latest",
+    "request"     : "latest",
+    "cheerio"     : "latest",
+    "config"      : "latest"
+  },
+  "devDependencies": {
+    "mocha": "latest"
+  },
+  "author": "Andy Kelk",
+  "license": "MIT"
+}
