@@ -48,10 +48,11 @@ Bot.prototype.handleMessage = function (message) {
   var user = that.slack.getUserByID(message.user);
 
   if (Bot.isDirect(that.slack.self.id, message)) {
-    if (found = message.text.match(/\btop (\d+)\b/i)) {
+    if (found = message.text.match(/\btop (\d+)( this week)?\b/i)) {
       console.log(channel.name + ':' + user.name + ':' + message.text);
-      that.league.getLeaderboard(function(leaderboard) {
-        message = "Here's the current top " + found[1]  + ":\n";
+      justThisWeek = found[2].toLowerCase() == ' this week';
+      that.league.getLeaderboard((justThisWeek ? true : false), function(leaderboard) {
+        message = (justThisWeek ? "Here's this week's top " : "Here's the current top ") + found[1]  + ":\n";
         message += leaderboard.slice(0,parseInt(found[1]))
           .map(function(obj) {
             return obj.name + ' with ' + obj.totalScore + ' points';
@@ -60,10 +61,11 @@ Bot.prototype.handleMessage = function (message) {
         channel.send(message);
       });
     }
-    else if (found = message.text.match(/\bbottom (\d+)\b/i)) {
+    else if (found = message.text.match(/\bbottom (\d+)( this week)?\b/i)) {
       console.log(channel.name + ':' + user.name + ':' + message.text);
-      that.league.getLeaderboard(function(leaderboard) {
-        message = "Here's the current bottom " + found[1] + ":\n";
+      justThisWeek = found[2].toLowerCase() == ' this week';
+      that.league.getLeaderboard((justThisWeek ? true : false), function(leaderboard) {
+        message = (justThisWeek ? "Here's this week's bottom" : "Here's the current bottom ") + found[1] + ":\n";
         message += leaderboard.slice(parseInt('-' + found[1]))
           .map(function(obj) {
             return obj.name + ' with ' + obj.totalScore + ' points';
